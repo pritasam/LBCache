@@ -28,6 +28,7 @@
 - (void) dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver: self name: UIApplicationDidReceiveMemoryWarningNotification object: [UIApplication sharedApplication]];
+    [[NSNotificationCenter defaultCenter] removeObserver: self name: UIApplicationWillTerminateNotification object: [UIApplication sharedApplication]];
 }
 
 
@@ -62,7 +63,8 @@
         lbInstance = [[super allocWithZone: nil] init];
         
         [[NSNotificationCenter defaultCenter] addObserver: lbInstance selector: @selector(memoryWarningAction:) name: UIApplicationDidReceiveMemoryWarningNotification object: [UIApplication sharedApplication]];
-
+        [[NSNotificationCenter defaultCenter] addObserver: lbInstance selector: @selector(memoryWarningAction:) name: UIApplicationWillTerminateNotification object: [UIApplication sharedApplication]];
+        
         [lbInstance removeCachedImages];
     });
     return lbInstance;
